@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adarsh Kumar Singh — B.Tech Electronics & Communication Engineering student at JECRC University, Jaipur, and Digital Designer & Creative Developer crafting fluid interfaces, embedded systems, and digital products.">
+  <meta name="author" content="Adarsh Kumar Singh">
+  <meta name="theme-color" content="#0b0b0c">
+  <title>Adarsh Kumar Singh — Digital Designer, Developer &amp; ECE Engineer</title>
+
+  <!-- Google Fonts with font-display: swap and system font fallback in CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Relative stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Relative vanilla script -->
+  <script src="script.js" defer></script>
+</head>
+<body class="theme-dark">
+  <!-- Subtle Grain / Static Noise Overlay (Non-animated static layer) -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Shared Spotlight Moving Element (GPU-accelerated translate3d) -->
+  <div class="spotlight-orb" id="spotlight-orb" aria-hidden="true"></div>
+
+  <!-- Custom Cursor Elements (Active on desktop non-touch) -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true">
+    <span class="cursor-label" id="cursor-label"></span>
+  </div>
+  <canvas id="trail-canvas" class="trail-canvas" aria-hidden="true"></canvas>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Confetti Canvas for Easter Egg & Celebrations -->
+  <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- GPU-Accelerated Scroll Progress Bar (scaleX) -->
+  <div class="scroll-progress-bar" id="scroll-progress-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+  <!-- Page-Load Intro Animation (Quick & Skippable under 1.5s) -->
+  <div class="intro-loader" id="intro-loader" aria-hidden="true">
+    <div class="intro-content">
+      <div class="intro-top">
+        <span class="intro-badge">PORTFOLIO // JECRC ECE</span>
+        <span class="intro-counter" id="intro-counter">000%</span>
+      </div>
+      <h2 class="intro-title">ADARSH KUMAR SINGH</h2>
+      <p class="intro-subtitle">Digital Designer • Developer • ECE Student</p>
+      <div class="intro-bar-wrap">
+        <div class="intro-bar" id="intro-bar"></div>
+      </div>
+      <button class="intro-skip" id="intro-skip-btn" type="button">Skip Intro [Esc / Click]</button>
+    </div>
+  </div>
+
+  <!-- Site Header & Floating Pill Navigation -->
+  <header class="site-header" id="site-header">
+    <nav class="nav-container" aria-label="Main Navigation">
+      <!-- Brand Wordmark -->
+      <a href="#hero" class="brand-logo magnetic" aria-label="Adarsh Kumar Singh Home">
+        <span class="logo-text">ADARSH</span><span class="accent-dot">.</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="#hero" class="nav-link active magnetic" data-section="hero">Home</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link magnetic" data-section="about">About</a></li>
+        <li class="nav-item"><a href="#education" class="nav-link magnetic" data-section="education">Education</a></li>
+        <li class="nav-item"><a href="#projects" class="nav-link magnetic" data-section="projects">Projects</a></li>
+        <li class="nav-item"><a href="#playground" class="nav-link magnetic" data-section="playground">Playground</a></li>
+        <li class="nav-item"><a href="#skills" class="nav-link magnetic" data-section="skills">Skills</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link magnetic" data-section="contact">Contact</a></li>
+      </ul>
+
+      <!-- Nav Controls: Theme Toggle & Pill CTA -->
+      <div class="nav-actions">
+        <button class="theme-toggle-btn magnetic" id="theme-toggle-btn" type="button" aria-label="Toggle light/dark theme">
+          <svg class="theme-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="#contact" class="btn btn-pill-nav magnetic" data-cursor="TALK">
+          <span>Let's talk</span>
+          <svg class="btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 15L15 5M15 5H7M15 5V13"></path>
+          </svg>
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="menu-toggle-btn" id="menu-toggle-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+          <span class="hamburger-line line-1"></span>
+          <span class="hamburger-line line-2"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Full-Screen Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <ul class="mobile-nav-list">
+          <li><a href="#hero" class="mobile-nav-link" data-section="hero"><span class="link-num">01</span>Home</a></li>
+          <li><a href="#about" class="mobile-nav-link" data-section="about"><span class="link-num">02</span>About</a></li>
+          <li><a href="#education" class="mobile-nav-link" data-section="education"><span class="link-num">03</span>Education</a></li>
+          <li><a href="#projects" class="mobile-nav-link" data-section="projects"><span class="link-num">04</span>Projects</a></li>
+          <li><a href="#playground" class="mobile-nav-link" data-section="playground"><span class="link-num">05</span>Playground</a></li>
+          <li><a href="#skills" class="mobile-nav-link" data-section="skills"><span class="link-num">06</span>Skills</a></li>
+          <li><a href="#contact" class="mobile-nav-link" data-section="contact"><span class="link-num">07</span>Contact</a></li>
+        </ul>
+        <div class="mobile-nav-footer">
+          <p class="mobile-status"><span class="pulse-dot"></span> B.Tech ECE @ JECRC University, Jaipur</p>
+          <a href="mailto:adarsh.dev@example.com" class="mobile-email">adarsh.dev@example.com</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- ======================================================== -->
+    <!-- SECTION 1: HERO SECTION -->
+    <!-- ======================================================== -->
+    <section class="hero-section spotlight-area" id="hero" aria-label="Introduction and Hero">
+      <div class="hero-bg-blobs" aria-hidden="true">
+        <div class="hero-blob blob-coral" data-parallax-depth="0.03"></div>
+        <div class="hero-blob blob-lavender" data-parallax-depth="-0.02"></div>
+      </div>
+
+      <div class="container hero-container">
+        <!-- Hero Text & Headline Column -->
+        <div class="hero-text-content">
+          <!-- Student & Availability Pill Badges -->
+          <div class="hero-status-row">
+            <div class="hero-status-pill student-pill reveal-item">
+              <span class="circuit-icon">⚡</span>
+              <span class="status-label">B.Tech ECE Student @ JECRC University, Jaipur</span>
+            </div>
+            <div class="hero-status-pill reveal-item">
+              <span class="pulse-dot"></span>
+              <span class="status-label">Available for work</span>
+            </div>
+          </div>
+
+          <!-- Signature Cursor-Reactive Headline -->
+          <h1 class="hero-title" id="hero-title" aria-label="Adarsh Kumar Singh">
+            ADARSH KUMAR SINGH
+          </h1>
+
+          <!-- Typed / Rotating Role Text -->
+          <div class="hero-role-wrapper reveal-item">
+            <span class="role-intro">Digital </span>
+            <span class="role-rotator" id="role-rotator">Designer</span>
+            <span class="role-cursor" aria-hidden="true">|</span>
+          </div>
+
+          <p class="hero-bio reveal-item">
+            Synthesizing the precision of Electronics &amp; Communication Engineering with expressive digital design and high-performance frontend code. Building tactile interfaces, embedded IoT solutions, and digital products that feel alive.
+          </p>
+
+          <!-- CTAs -->
+          <div class="hero-actions reveal-item">
+            <a href="#projects" class="btn btn-primary magnetic" data-cursor="EXPLORE">
+              <span>Explore Projects</span>
+              <svg class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 10H16M16 10L10 4M16 10L10 16"></path>
+              </svg>
+            </a>
+            <a href="#education" class="btn btn-secondary magnetic" data-cursor="VIEW">
+              <span>View Education</span>
+            </a>
+            <a href="#contact" class="btn btn-ghost magnetic" data-cursor="TALK">
+              <span>Get In Touch</span>
+            </a>
+          </div>
+
+          <!-- Hero Tech Ticker -->
+          <div class="hero-badges-row reveal-item">
+            <span class="micro-badge">Embedded IoT</span>
+            <span class="micro-badge">Electronics &amp; Comm</span>
+            <span class="micro-badge">Figma UI/UX</span>
+            <span class="micro-badge">Vanilla JavaScript</span>
+            <span class="micro-badge">60 FPS Motion</span>
+          </div>
+        </div>
+
+        <!-- Hero Photo & Layered Floating Elements Column -->
+        <div class="hero-visual-col">
+          <div class="hero-photo-stage" id="hero-photo-stage">
+            <!-- Offset decorative backdrops behind cutout -->
+            <div class="photo-backdrop backdrop-coral" data-parallax-depth="0.04" aria-hidden="true"></div>
+            <div class="photo-backdrop backdrop-lavender" data-parallax-depth="-0.03" aria-hidden="true"></div>
+
+            <!-- Main Hero Cutout Image -->
+            <div class="hero-image-frame" data-parallax-depth="0.02">
+              <img 
+                src="assets/adarsh-hero.png" 
+                alt="Adarsh Kumar Singh — Digital Designer, Developer and B.Tech ECE Student portrait cutout"
+                width="600" 
+                height="750" 
+                decoding="async"
+                class="hero-photo" 
+                id="hero-photo"
+                onerror="handleImgError(this)" 
+                data-caption="Adarsh Kumar Singh">
+            </div>
+
+            <!-- Floating Sticker 1: "Design + Code" -->
+            <div class="floating-sticker sticker-code float-slow" data-parallax-depth="0.07" aria-hidden="true">
+              <span class="sticker-icon">✦</span>
+              <span class="sticker-text">Design + Code</span>
+            </div>
+
+            <!-- Floating Sticker 2: "ECE @ JECRC" -->
+            <div class="floating-sticker sticker-ece float-medium" data-parallax-depth="-0.06" aria-hidden="true">
+              <span class="sticker-icon">⚡</span>
+              <span class="sticker-text">ECE @ JECRC</span>
+            </div>
+
+            <!-- Floating Sticker 3: "Available for work" -->
+            <div class="floating-sticker sticker-status float-reverse" data-parallax-depth="0.05" aria-hidden="true">
+              <span class="pulse-dot"></span>
+              <span class="sticker-text">Available for work</span>
+            </div>
+
+            <!-- Floating Sticker 4: Rotating circular text badge -->
+            <div class="floating-sticker sticker-circle float-slow" data-parallax-depth="0.09" aria-hidden="true">
+              <svg class="rotating-text-svg" viewBox="0 0 140 140">
+                <path id="circle-text-path" d="M 70, 70 m -50, 0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" fill="none"></path>
+                <text>
+                  <textPath href="#circle-text-path" startOffset="0%">
+                    • DIGITAL DESIGNER • ECE ENGINEER •
+                  </textPath>
+                </text>
+              </svg>
+              <div class="circle-center-star">★</div>
+            </div>
+
+            <!-- Floating Sparkle Stars (Decorative, hidden in lite mode) -->
+            <div class="floating-sparkle sparkle-1 float-decorative float-slow" data-parallax-depth="0.10" aria-hidden="true">✦</div>
+            <div class="floating-sparkle sparkle-2 float-decorative float-medium" data-parallax-depth="-0.08" aria-hidden="true">✧</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Scroll Down Indicator -->
+      <a href="#about" class="hero-scroll-down magnetic" aria-label="Scroll to About section" data-cursor="SCROLL">
+        <span class="scroll-mouse-icon">
+          <span class="scroll-wheel"></span>
+        </span>
+        <span class="scroll-label">Scroll to explore</span>
+      </a>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 2: ABOUT SECTION -->
+    <!-- ======================================================== -->
+    <section class="about-section" id="about" aria-label="About Adarsh Kumar Singh">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal-item">
+          <div class="section-tag">// 01. IDENTITY &amp; PASSION</div>
+          <h2 class="section-title">ABOUT ME</h2>
+          <p class="section-subtitle">Where electronics hardware rigor meets digital design and frontend engineering.</p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Left: Stacked Polaroid Photo Collage -->
+          <div class="about-photos-col">
+            <div class="polaroid-collage" id="polaroid-collage" aria-label="Interactive photo gallery of Adarsh">
+              <!-- Polaroid 1 -->
+              <div class="polaroid-card polaroid-1 tilt-card" tabindex="0" role="button" aria-label="View photo 1: Design Studio & Systems in lightbox" data-index="0" data-cursor="VIEW">
+                <div class="polaroid-inner">
+                  <div class="polaroid-img-wrap">
+                    <img 
+                      src="assets/adarsh-1.jpg" 
+                      alt="Adarsh's design studio setup and design systems workspace" 
+                      width="800" 
+                      height="600" 
+                      loading="lazy" 
+                      decoding="async"
+                      onerror="handleImgError(this)" 
+                      data-caption="01 // Design Studio &amp; Systems Architecture">
+                  </div>
+                  <div class="polaroid-caption">
+                    <span class="polaroid-num">01</span>
+                    <span class="polaroid-title">Design Studio &amp; Systems</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Polaroid 2 -->
+              <div class="polaroid-card polaroid-2 tilt-card" tabindex="0" role="button" aria-label="View photo 2: Wireframing & Strategy in lightbox" data-index="1" data-cursor="VIEW">
+                <div class="polaroid-inner">
+                  <div class="polaroid-img-wrap">
+                    <img 
+                      src="assets/adarsh-2.jpg" 
+                      alt="Adarsh wireframing UI flows and user interaction strategies" 
+                      width="800" 
+                      height="600" 
+                      loading="lazy" 
+                      decoding="async"
+                      onerror="handleImgError(this)" 
+                      data-caption="02 // Wireframing &amp; UX Strategy">
+                  </div>
+                  <div class="polaroid-caption">
+                    <span class="polaroid-num">02</span>
+                    <span class="polaroid-title">Wireframing &amp; Strategy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Polaroid 3 -->
+              <div class="polaroid-card polaroid-3 tilt-card" tabindex="0" role="button" aria-label="View photo 3: Creative Code Lab in lightbox" data-index="2" data-cursor="VIEW">
+                <div class="polaroid-inner">
+                  <div class="polaroid-img-wrap">
+                    <img 
+                      src="assets/adarsh-3.jpg" 
+                      alt="Adarsh coding creative web animations and responsive prototypes" 
+                      width="800" 
+                      height="600" 
+                      loading="lazy" 
+                      decoding="async"
+                      onerror="handleImgError(this)" 
+                      data-caption="03 // Creative Code Lab &amp; Prototyping">
+                  </div>
+                  <div class="polaroid-caption">
+                    <span class="polaroid-num">03</span>
+                    <span class="polaroid-title">Creative Code Lab</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="polaroid-hint" aria-hidden="true">✦ Hover to straighten • Click to enlarge</p>
+          </div>
+
+          <!-- Right: Bio Story & Stats -->
+          <div class="about-text-col">
+            <div class="about-bio-card reveal-item">
+              <h3 class="bio-heading">Designing with intention. Engineering with discipline.</h3>
+              <p class="bio-paragraph">
+                I am Adarsh Kumar Singh, currently pursuing my <strong>B.Tech in Electronics &amp; Communication Engineering at JECRC University, Jaipur</strong>. Simultaneously, I work as an independent digital designer and frontend developer obsessed with micro-interactions, typography, and fluid user experiences.
+              </p>
+              <p class="bio-paragraph">
+                My foundation in electronics gives me a unique mental model: I understand systems from the silicon level — signals, logic gates, and microcontroller registers — all the way up to semantic DOM structures, CSS architectures, and visual design systems in Figma.
+              </p>
+              <p class="bio-paragraph">
+                I believe modern digital products shouldn't feel like generic templates. Great work requires generous negative space, intentional typography, frictionless user flows, and code architectures that run at a smooth 60 frames per second.
+              </p>
+            </div>
+
+            <!-- Floating Electronics Icons / Theme Chips -->
+            <div class="ece-skill-chips-row reveal-item" aria-label="Electronics and engineering chips">
+              <div class="ece-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chip-svg"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+                <span>Microcontrollers &amp; ESP32</span>
+              </div>
+              <div class="ece-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chip-svg"><path d="M2 12h4l3-9 6 18 3-9h4"></path></svg>
+                <span>Signal Processing</span>
+              </div>
+              <div class="ece-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chip-svg"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>Digital Circuits</span>
+              </div>
+              <div class="ece-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chip-svg"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <span>Full-Stack Prototyping</span>
+              </div>
+            </div>
+
+            <!-- Animated Stats Grid -->
+            <div class="stats-grid reveal-item" id="stats-grid">
+              <div class="stat-card">
+                <div class="stat-number" data-target="4" data-suffix=" Yrs">0 Yrs</div>
+                <div class="stat-label">B.Tech ECE Program</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="25" data-suffix="+">0+</div>
+                <div class="stat-label">Design &amp; Code Builds</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="99" data-suffix="%">0%</div>
+                <div class="stat-label">Layout Polish &amp; Care</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="60" data-suffix=" FPS">0 FPS</div>
+                <div class="stat-label">Smooth Motion Target</div>
+              </div>
+            </div>
+
+            <!-- Fun Facts Row -->
+            <div class="fun-facts-row reveal-item">
+              <div class="fact-chip">🏛️ JECRC University, Jaipur</div>
+              <div class="fact-chip">⚡ Arduino &amp; ESP32 Tinkerer</div>
+              <div class="fact-chip">☕ Espresso Enthusiast</div>
+              <div class="fact-chip">📐 Sub-pixel Perfectionist</div>
+              <div class="fact-chip">🎧 Lo-Fi &amp; Ambient Synth</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 3: EDUCATION (Interactive Timeline) -->
+    <!-- ======================================================== -->
+    <section class="education-section spotlight-area" id="education" aria-label="Education and Academic Background">
+      <div class="container">
+        <!-- Section Header with Oversized Number & Name -->
+        <div class="section-header reveal-item">
+          <div class="section-tag">// 02. ACADEMIC JOURNEY</div>
+          <div class="education-header-meta">
+            <span class="oversized-num">02</span>
+            <div>
+              <h2 class="section-title">EDUCATION</h2>
+              <p class="education-name-tag">Adarsh Kumar Singh • Academic Milestones &amp; Foundations</p>
+            </div>
+          </div>
+          <p class="section-subtitle">Electronics &amp; Communication Engineering principles combined with rigorous secondary foundations.</p>
+        </div>
+
+        <div class="timeline-wrapper">
+          <!-- Floating "Currently studying ECE" Sticker -->
+          <div class="floating-sticker sticker-studying float-slow" data-parallax-depth="0.04" aria-hidden="true">
+            <span class="pulse-dot"></span>
+            <span class="sticker-text">Currently Studying ECE</span>
+          </div>
+
+          <!-- Dynamic SVG Spine Line that draws on scroll -->
+          <div class="timeline-svg-container" aria-hidden="true">
+            <svg class="timeline-svg" preserveAspectRatio="none" viewBox="0 0 10 1000">
+              <line x1="5" y1="0" x2="5" y2="1000" class="timeline-line-base" />
+              <line x1="5" y1="0" x2="5" y2="1000" class="timeline-line-active" id="timeline-svg-line" />
+            </svg>
+          </div>
+
+          <!-- Timeline Cards Grid (3 Cards, newest first) -->
+          <div class="timeline-cards-list" id="timeline-cards-list">
+            
+            <!-- Card 1: B.Tech ECE, JECRC University -->
+            <article class="timeline-card tilt-card reveal-item is-expanded" data-index="0" tabindex="0" role="button" aria-expanded="true" aria-label="View B.Tech ECE education details">
+              <div class="timeline-node" aria-hidden="true">
+                <span class="node-dot active-dot"></span>
+              </div>
+              <div class="timeline-card-inner">
+                <div class="card-glass-shine" aria-hidden="true"></div>
+                <div class="timeline-card-header">
+                  <div class="degree-icon-wrap icon-btech">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="timeline-icon"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+                  </div>
+                  <div>
+                    <span class="timeline-status-badge status-current">Current Program</span>
+                    <h3 class="timeline-degree">B.Tech in Electronics &amp; Communication Engineering</h3>
+                    <h4 class="timeline-institution">JECRC University, Jaipur</h4>
+                  </div>
+                </div>
+
+                <div class="timeline-meta-row">
+                  <div class="meta-item"><span class="meta-label">Tenure</span><span class="meta-val">2026 – 2030</span></div>
+                  <div class="meta-item"><span class="meta-label">Status</span><span class="meta-val text-accent">Currently Studying</span></div>
+                  <div class="meta-item"><span class="meta-label">CGPA</span><span class="meta-val">In Progress</span></div>
+                </div>
+
+                <p class="timeline-highlight">
+                  Specializing in embedded systems, digital electronics, telecommunication architectures, and microcomputer hardware-software interfacing.
+                </p>
+
+                <!-- Expandable Subject & Achievement Chips -->
+                <div class="timeline-expandable-content">
+                  <div class="chips-section">
+                    <span class="chips-title">Key Subjects &amp; Domains:</span>
+                    <div class="chips-flex">
+                      <span class="subject-chip">Digital Electronics</span>
+                      <span class="subject-chip">Signals &amp; Systems</span>
+                      <span class="subject-chip">Analog Circuit Design</span>
+                      <span class="subject-chip">Embedded Systems</span>
+                      <span class="subject-chip">Communication Systems</span>
+                      <span class="subject-chip">Network Theory</span>
+                    </div>
+                  </div>
+                  <div class="chips-section">
+                    <span class="chips-title">Key Highlights:</span>
+                    <div class="chips-flex">
+                      <span class="achieve-chip">🏆 Active Hardware &amp; Robotics Lab Contributor</span>
+                      <span class="achieve-chip">🚀 Bridging Microcontrollers with Web Interfaces</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-card-footer">
+                  <span class="expand-hint">Click card to collapse / expand details</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 2: Class XII (Senior Secondary), St. Michael's Academy -->
+            <article class="timeline-card tilt-card reveal-item" data-index="1" tabindex="0" role="button" aria-expanded="false" aria-label="View Class XII education details">
+              <div class="timeline-node" aria-hidden="true">
+                <span class="node-dot"></span>
+              </div>
+              <div class="timeline-card-inner">
+                <div class="card-glass-shine" aria-hidden="true"></div>
+                <div class="timeline-card-header">
+                  <div class="degree-icon-wrap icon-school">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="timeline-icon"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                  </div>
+                  <div>
+                    <span class="timeline-status-badge">Senior Secondary (CBSE)</span>
+                    <h3 class="timeline-degree">Class XII — Science &amp; Mathematics</h3>
+                    <h4 class="timeline-institution">St. Michael's Academy</h4>
+                  </div>
+                </div>
+
+                <div class="timeline-meta-row">
+                  <div class="meta-item"><span class="meta-label">Board</span><span class="meta-val">CBSE</span></div>
+                  <div class="meta-item"><span class="meta-label">Year of Completion</span><span class="meta-val">2026</span></div>
+                  <div class="meta-item"><span class="meta-label">Percentage</span><span class="meta-val text-accent">73.4%</span></div>
+                </div>
+
+                <p class="timeline-highlight">
+                  Rigorous focus on Physics, Mathematics, and Chemistry with practical laboratory training, numerical problem solving, and analytical computation.
+                </p>
+
+                <!-- Expandable Chips -->
+                <div class="timeline-expandable-content">
+                  <div class="chips-section">
+                    <span class="chips-title">Key Subjects:</span>
+                    <div class="chips-flex">
+                      <span class="subject-chip">Physics (Mechanics &amp; Electromagnetism)</span>
+                      <span class="subject-chip">Mathematics (Calculus &amp; Vectors)</span>
+                      <span class="subject-chip">Chemistry</span>
+                      <span class="subject-chip">English Core</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-card-footer">
+                  <span class="expand-hint">Click card to expand details</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 3: Class X (Secondary), St. Michael's Academy -->
+            <article class="timeline-card tilt-card reveal-item" data-index="2" tabindex="0" role="button" aria-expanded="false" aria-label="View Class X education details">
+              <div class="timeline-node" aria-hidden="true">
+                <span class="node-dot"></span>
+              </div>
+              <div class="timeline-card-inner">
+                <div class="card-glass-shine" aria-hidden="true"></div>
+                <div class="timeline-card-header">
+                  <div class="degree-icon-wrap icon-secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="timeline-icon"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                  </div>
+                  <div>
+                    <span class="timeline-status-badge">Secondary (CBSE)</span>
+                    <h3 class="timeline-degree">Class X — Secondary School Certificate</h3>
+                    <h4 class="timeline-institution">St. Michael's Academy</h4>
+                  </div>
+                </div>
+
+                <div class="timeline-meta-row">
+                  <div class="meta-item"><span class="meta-label">Board</span><span class="meta-val">CBSE</span></div>
+                  <div class="meta-item"><span class="meta-label">Year of Completion</span><span class="meta-val">2024</span></div>
+                  <div class="meta-item"><span class="meta-label">Percentage</span><span class="meta-val text-accent">78.0%</span></div>
+                </div>
+
+                <p class="timeline-highlight">
+                  Foundational academic training across natural sciences, core mathematics, social studies, and language arts, sparking an early interest in computer graphics and electronics.
+                </p>
+
+                <!-- Expandable Chips -->
+                <div class="timeline-expandable-content">
+                  <div class="chips-section">
+                    <span class="chips-title">Key Highlights:</span>
+                    <div class="chips-flex">
+                      <span class="achieve-chip">Honors in Science &amp; Mathematics</span>
+                      <span class="achieve-chip">Active participant in Science Exhibition projects</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-card-footer">
+                  <span class="expand-hint">Click card to expand details</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Download Resume Action Pill -->
+        <div class="education-actions-row reveal-item">
+          <a href="#contact" class="btn btn-primary magnetic" id="download-resume-btn" data-cursor="RESUME">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download Resume [PDF]</span>
+          </a>
+          <span class="resume-note">Updated for Q4 2026 Academic &amp; Design Profiles</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 4: PROJECTS (Dedicated, Prominent Showcase) -->
+    <!-- ======================================================== -->
+    <section class="projects-section spotlight-area" id="projects" aria-label="Featured Projects Portfolio">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header-row reveal-item">
+          <div>
+            <div class="section-tag">// 03. PORTFOLIO SHOWCASE</div>
+            <h2 class="section-title">FEATURED WORK</h2>
+            <p class="section-subtitle">A curated collection spanning embedded electronics, web applications, design systems, and creative experiments.</p>
+          </div>
+
+          <!-- Project Filter Chips (FLIP-animated) -->
+          <div class="filter-chips-wrap" role="tablist" aria-label="Filter portfolio projects">
+            <button class="filter-chip active" role="tab" aria-selected="true" data-filter="all">All (6)</button>
+            <button class="filter-chip" role="tab" aria-selected="false" data-filter="web">Web (3)</button>
+            <button class="filter-chip" role="tab" aria-selected="false" data-filter="design">Design (2)</button>
+            <button class="filter-chip" role="tab" aria-selected="false" data-filter="electronics">Electronics (2)</button>
+            <button class="filter-chip" role="tab" aria-selected="false" data-filter="apps">Apps (3)</button>
+          </div>
+        </div>
+
+        <!-- Bento Grid of 6 Projects -->
+        <div class="projects-bento-grid" id="projects-bento-grid">
+          
+          <!-- Project 1: Smart Home Automation ESP32 (Span 2) -->
+          <article class="project-card card-span-2 tilt-card" data-category="electronics,apps" data-project-id="smarthome" tabindex="0" role="button" aria-label="View case study for Smart Home Automation using ESP32" data-cursor="VIEW">
+            <div class="card-glass-shine" aria-hidden="true"></div>
+            <div class="project-cover cover-esp32">
+              <div class="cover-art art-esp32" aria-hidden="true">
+                <div class="art-grid-lines"></div>
+                <div class="art-chip-node chip-center">
+                  <span class="chip-label">ESP32-WROOM</span>
+                  <div class="chip-pins"></div>
+                </div>
+                <div class="art-token-node node-1">WiFi / MQTT 2.4GHz</div>
+                <div class="art-token-node node-2">Relay Array 4-CH</div>
+                <div class="art-token-node node-3">Real-time Web UI</div>
+                <div class="art-glow-orb orb-coral"></div>
+              </div>
+              <span class="project-pill-category">Electronics / IoT &amp; Hardware</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-year">2026</span>
+                <span class="project-client">JECRC ECE Lab Prototype</span>
+              </div>
+              <h3 class="project-title">Smart Home Automation with ESP32</h3>
+              <p class="project-desc">
+                An end-to-end IoT home control system leveraging an ESP32 microcontroller, dual-channel relay drivers, MQTT telemetry, and an ultra-responsive browser dashboard for sub-100ms appliance switching.
+              </p>
+              <div class="project-tags">
+                <span class="tag">ESP32</span>
+                <span class="tag">C++ / Arduino</span>
+                <span class="tag">MQTT Protocol</span>
+                <span class="tag">WebSockets</span>
+                <span class="tag">Hardware Interfacing</span>
+              </div>
+              <div class="project-links-row">
+                <span class="view-case-link">
+                  <span>Explore Case Study</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+                </span>
+                <div class="project-quick-actions" onclick="event.stopPropagation()">
+                  <a href="#projects" class="quick-link" title="Circuit Diagram" aria-label="ESP32 Circuit Diagram">Circuit</a>
+                  <a href="#projects" class="quick-link" title="Source Code" aria-label="ESP32 Firmware Code">Firmware</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Bluetooth Controlled Robotic Rover (Span 1) -->
+          <article class="project-card tilt-card" data-category="electronics,apps" data-project-id="robot" tabindex="0" role="button" aria-label="View case study for Bluetooth Controlled Robot" data-cursor="VIEW">
+            <div class="card-glass-shine" aria-hidden="true"></div>
+            <div class="project-cover cover-robot">
+              <div class="cover-art art-robot" aria-hidden="true">
+                <div class="art-radar-sweep"></div>
+                <div class="art-rover-chassis">
+                  <div class="wheel wheel-l"></div>
+                  <div class="chassis-body">L298N</div>
+                  <div class="wheel wheel-r"></div>
+                </div>
+                <div class="art-glow-orb orb-lime"></div>
+              </div>
+              <span class="project-pill-category">Electronics / Robotics</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-year">2025</span>
+                <span class="project-client">Robotics Lab Project</span>
+              </div>
+              <h3 class="project-title">Bluetooth Controlled Obstacle Rover</h3>
+              <p class="project-desc">
+                Differential-drive robotic vehicle powered by Arduino Uno, HC-05 Bluetooth transceiver, ultrasonic obstacle sensors, and L298N H-bridge motor driver.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Arduino</span>
+                <span class="tag">HC-05 BT</span>
+                <span class="tag">Ultrasonic Sensor</span>
+                <span class="tag">PWM Control</span>
+              </div>
+              <div class="project-links-row">
+                <span class="view-case-link">
+                  <span>View Details</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+                </span>
+                <div class="project-quick-actions" onclick="event.stopPropagation()">
+                  <a href="#projects" class="quick-link" title="Schematic" aria-label="Rover Schematic">Schematic</a>
+                  <a href="#projects" class="quick-link" title="Firmware Code" aria-label="Rover Firmware Code">Code</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Aether UI (Span 1) -->
+          <article class="project-card tilt-card" data-category="design,web" data-project-id="aether" tabindex="0" role="button" aria-label="View case study for Aether UI Design System" data-cursor="VIEW">
+            <div class="card-glass-shine" aria-hidden="true"></div>
+            <div class="project-cover cover-aether">
+              <div class="cover-art art-aether" aria-hidden="true">
+                <div class="art-grid-lines"></div>
+                <div class="art-token-node node-1">--color-accent: #ff4d2e</div>
+                <div class="art-token-node node-2">--space-fluid: clamp(...)</div>
+                <div class="art-glow-orb orb-lavender"></div>
+              </div>
+              <span class="project-pill-category">Design System / Web</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-year">2026</span>
+                <span class="project-client">Open Source Architecture</span>
+              </div>
+              <h3 class="project-title">Aether UI — Generative Design System</h3>
+              <p class="project-desc">
+                Multi-brand design token architecture with automated WCAG contrast validation, fluid mathematical typography ramps, and real-time CSS variable exports.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Design Tokens</span>
+                <span class="tag">Figma API</span>
+                <span class="tag">CSS Architecture</span>
+              </div>
+              <div class="project-links-row">
+                <span class="view-case-link">
+                  <span>View Details</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+                </span>
+                <div class="project-quick-actions" onclick="event.stopPropagation()">
+                  <a href="#projects" class="quick-link" title="Live Preview" aria-label="Aether UI Live Preview">Demo</a>
+                  <a href="#projects" class="quick-link" title="Source Code" aria-label="Aether UI Source Code">Code</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Chronos Studio (Span 2) -->
+          <article class="project-card card-span-2 tilt-card" data-category="web,apps" data-project-id="chronos" tabindex="0" role="button" aria-label="View case study for Chronos Studio" data-cursor="VIEW">
+            <div class="card-glass-shine" aria-hidden="true"></div>
+            <div class="project-cover cover-chronos">
+              <div class="cover-art art-chronos" aria-hidden="true">
+                <div class="art-timeline-bar"><div class="timeline-fill"></div></div>
+                <div class="art-metric-ring"><div class="metric-val">42.5h</div></div>
+                <div class="art-glow-orb orb-coral"></div>
+              </div>
+              <span class="project-pill-category">Web App / Productivity</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-year">2025</span>
+                <span class="project-client">Productivity Platform</span>
+              </div>
+              <h3 class="project-title">Chronos Studio — Minimalist Time Engine</h3>
+              <p class="project-desc">
+                Ultra-fast desktop web application for independent creators tracking billable project hours with zero external dependencies, offline local storage caching, and instant invoice PDF export.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Vanilla JS</span>
+                <span class="tag">Canvas API</span>
+                <span class="tag">Local Storage</span>
+                <span class="tag">CSS Grid</span>
+              </div>
+              <div class="project-links-row">
+                <span class="view-case-link">
+                  <span>Explore Case Study</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+                </span>
+                <div class="project-quick-actions" onclick="event.stopPropagation()">
+                  <a href="#projects" class="quick-link" title="Live Preview" aria-label="Chronos Studio Live Demo">Demo</a>
+                  <a href="#projects" class="quick-link" title="Source Code" aria-label="Chronos Studio Source Code">Code</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: Nebula Audio (Span 1) -->
+          <article class="project-card tilt-card" data-category="apps,web" data-project-id="nebula" tabindex="0" role="button" aria-label="View case study for Nebula Audio" data-cursor="VIEW">
+            <div class="card-glass-shine" aria-hidden="true"></div>
+            <div class="project-cover cover-nebula">
+              <div class="cover-art art-nebula" aria-hidden="true">
+                <div class="art-waveform-ring ring-1"></div>
+                <div class="art-waveform-ring ring-2"></div>
+                <div class="art-waveform-ring ring-3"></div>
+                <div class="art-glow-orb orb-purple"></div>
+              </div>
+              <span class="project-pill-category">Creative Dev / Audio</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-year">2025</span>
+                <span class="project-client">Audio Synthesis Lab</span>
+              </div>
+              <h3 class="project-title">Nebula Audio — 3D Spatial Synthesizer</h3>
+              <p class="project-desc">
+                Interactive sound interface featuring real-time generative harmonic rings, spatial panning DSP physics, and responsive HTML5 canvas waveforms.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Web Audio API</span>
+                <span class="tag">Canvas 2D</span>
+                <span class="tag">DSP Math</span>
+              </div>
+              <div class="project-links-row">
+                <span class="view-case-link">
+                  <span>View Details</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+                </span>
+                <div class="project-quick-actions" onclick="event.stopPropagation()">
+                  <a href="#projects" class="quick-link" title="Live Preview" aria-label="Nebula Audio Live Demo">Demo</a>
+                  <a href="#projects" class="quick-link" title="Source Code" aria-label="Nebula Audio Source Code">Code</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: Lumina (Span 1) -->
+          <article class="project-card tilt-card" data-category="web,design" data-project-id="lumina" tabindex="0" role="button" aria-label="View case study for Lumina Architectural Lighting" data-cursor="VIEW">
+            <div class="card-glass-shine" aria-hidden="true"></div>
+            <div class="project-cover cover-lumina">
+              <div class="cover-art art-lumina" aria-hidden="true">
+                <div class="art-light-cone"></div>
+                <div class="art-glow-orb orb-lime"></div>
+              </div>
+              <span class="project-pill-category">Web / Design</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-year">2026</span>
+                <span class="project-client">Studio Lumina Architecture</span>
+              </div>
+              <h3 class="project-title">Lumina — Architectural Lighting Commerce</h3>
+              <p class="project-desc">
+                Editorial showcase for architectural lighting designers featuring interactive ambient room illumination simulations and fluid responsive typography.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Fluid Typography</span>
+                <span class="tag">CSS Grid</span>
+                <span class="tag">Figma</span>
+              </div>
+              <div class="project-links-row">
+                <span class="view-case-link">
+                  <span>View Details</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+                </span>
+                <div class="project-quick-actions" onclick="event.stopPropagation()">
+                  <a href="#projects" class="quick-link" title="Live Preview" aria-label="Lumina Live Demo">Demo</a>
+                  <a href="#projects" class="quick-link" title="Source Code" aria-label="Lumina Source Code">Code</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Featured Case Study Spotlight Row (Draggable Horizontal Gallery) -->
+        <div class="case-study-spotlight reveal-item">
+          <div class="spotlight-header">
+            <div>
+              <span class="spotlight-badge">ENGINEERING &amp; DESIGN PROCESS</span>
+              <h3 class="spotlight-title">From Circuit Breadboard to Polished Pixel</h3>
+            </div>
+            <div class="drag-hint" aria-hidden="true">
+              <span class="drag-arrows">← Drag horizontally →</span>
+            </div>
+          </div>
+
+          <div class="drag-gallery-track" id="drag-gallery-track" tabindex="0" role="region" aria-label="Draggable case study process gallery" data-cursor="DRAG">
+            <div class="gallery-slide">
+              <div class="gallery-card">
+                <div class="slide-tag">01 // ELECTRONICS DESIGN</div>
+                <h4 class="slide-title">Schematics &amp; Hardware Pinouts</h4>
+                <p class="slide-desc">Mapping GPIO registers, power decoupling capacitors, and sensor I2C/SPI bus routing on breadboards.</p>
+                <div class="slide-mockup mockup-wireframe">
+                  <div class="wireframe-box box-1">GPIO 21 • I2C SDA</div>
+                  <div class="wireframe-box box-2">GPIO 22 • I2C SCL</div>
+                  <div class="wireframe-box box-3">VCC 3.3V • GND</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gallery-slide">
+              <div class="gallery-card">
+                <div class="slide-tag">02 // FIRMWARE &amp; PROTOCOLS</div>
+                <h4 class="slide-title">Embedded Logic &amp; WebSockets</h4>
+                <p class="slide-desc">Writing asynchronous non-blocking C++ event loops with FreeRTOS tasks to publish sensor telemetry.</p>
+                <div class="slide-mockup mockup-tokens">
+                  <div class="token-bar bar-1">WiFi.mode(WIFI_STA);</div>
+                  <div class="token-bar bar-2">mqttClient.publish(topic, val);</div>
+                  <div class="token-bar bar-3">xTaskCreatePinnedToCore(...);</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gallery-slide">
+              <div class="gallery-card">
+                <div class="slide-tag">03 // USER INTERFACE</div>
+                <h4 class="slide-title">Figma Tokens &amp; Ergonomics</h4>
+                <p class="slide-desc">Designing readable dashboards with generous spacing, WCAG-compliant status alerts, and intuitive touch toggles.</p>
+                <div class="slide-mockup mockup-motion">
+                  <div class="motion-dot dot-1"></div>
+                  <div class="motion-dot dot-2"></div>
+                  <div class="motion-dot dot-3"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gallery-slide">
+              <div class="gallery-card">
+                <div class="slide-tag">04 // PRODUCTION BUILD</div>
+                <h4 class="slide-title">60 FPS Vanilla Frontend</h4>
+                <p class="slide-desc">Rendering real-time sensor charts with zero npm dependencies, semantic HTML5, and single rAF paint loops.</p>
+                <div class="slide-mockup mockup-code">
+                  <code>requestAnimationFrame(render);</code>
+                  <code>el.style.transform = `translate3d(...)`;</code>
+                  <code>WebSocket.onmessage = handleTelemetry;</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 5: INTERACTIVE PLAYGROUND (Fun, Hands-on Lab) -->
+    <!-- ======================================================== -->
+    <section class="playground-section spotlight-area" id="playground" aria-label="Interactive Playground and Experiments">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal-item">
+          <div class="section-tag">// 04. LAB &amp; EXPERIMENTS</div>
+          <h2 class="section-title">INTERACTIVE PLAYGROUND</h2>
+          <p class="section-subtitle">Tactile creative widgets, live theme switchers, and hardware-inspired sandboxes.</p>
+        </div>
+
+        <div class="playground-grid">
+          <!-- Toy 1: Pick Your Vibe (Live Accent Color Switcher) -->
+          <div class="play-card vibe-card reveal-item">
+            <div class="play-card-header">
+              <div class="play-card-icon">🎨</div>
+              <div>
+                <h3 class="play-card-title">Pick Your Vibe</h3>
+                <p class="play-card-desc">Live-update the whole portfolio's accent color &amp; glows in real time.</p>
+              </div>
+            </div>
+
+            <div class="vibe-palette-row" role="group" aria-label="Select accent color theme">
+              <button class="vibe-btn active" data-vibe="coral" data-hex="#ff4d2e" style="--btn-color: #ff4d2e" aria-label="Hot Coral theme">
+                <span class="vibe-swatch"></span>
+                <span class="vibe-name">Hot Coral</span>
+              </button>
+              <button class="vibe-btn" data-vibe="lime" data-hex="#10e575" style="--btn-color: #10e575" aria-label="Electric Lime theme">
+                <span class="vibe-swatch"></span>
+                <span class="vibe-name">Electric Lime</span>
+              </button>
+              <button class="vibe-btn" data-vibe="cyan" data-hex="#00f0ff" style="--btn-color: #00f0ff" aria-label="Cyber Cyan theme">
+                <span class="vibe-swatch"></span>
+                <span class="vibe-name">Cyber Cyan</span>
+              </button>
+              <button class="vibe-btn" data-vibe="purple" data-hex="#a855f7" style="--btn-color: #a855f7" aria-label="Hyper Violet theme">
+                <span class="vibe-swatch"></span>
+                <span class="vibe-name">Hyper Violet</span>
+              </button>
+              <button class="vibe-btn" data-vibe="amber" data-hex="#ffb703" style="--btn-color: #ffb703" aria-label="Amber Gold theme">
+                <span class="vibe-swatch"></span>
+                <span class="vibe-name">Amber Gold</span>
+              </button>
+            </div>
+
+            <div class="vibe-preview-badge">
+              <span class="current-vibe-label">Current Accent: </span>
+              <strong id="current-vibe-name">Hot Coral (#ff4d2e)</strong>
+              <span class="vibe-save-hint">✓ Saved to localStorage</span>
+            </div>
+          </div>
+
+          <!-- Toy 2: Draggable Sticker Board -->
+          <div class="play-card sticker-board-card reveal-item">
+            <div class="play-card-header">
+              <div class="play-card-icon">⚡</div>
+              <div>
+                <h3 class="play-card-title">Draggable Sticker Board</h3>
+                <p class="play-card-desc">Grab, toss and throw tactile stickers with physics momentum.</p>
+              </div>
+              <button class="btn-sm btn-ghost reset-stickers-btn" id="reset-stickers-btn" type="button">Reset</button>
+            </div>
+
+            <div class="sticker-sandbox" id="sticker-sandbox" data-cursor="DRAG" aria-label="Interactive draggable stickers board">
+              <div class="sandbox-hint" aria-hidden="true">✦ Drag stickers around &amp; fling them!</div>
+              <!-- Floating Draggable Stickers -->
+              <div class="drag-sticker sticker-item-1" data-id="1" tabindex="0" role="button" aria-label="Draggable sticker: Ship It">
+                <span>🔥 SHIP IT!</span>
+              </div>
+              <div class="drag-sticker sticker-item-2" data-id="2" tabindex="0" role="button" aria-label="Draggable sticker: ECE @ JECRC">
+                <span>⚡ ECE @ JECRC</span>
+              </div>
+              <div class="drag-sticker sticker-item-3" data-id="3" tabindex="0" role="button" aria-label="Draggable sticker: 60 FPS Only">
+                <span>📐 60 FPS ONLY</span>
+              </div>
+              <div class="drag-sticker sticker-item-4" data-id="4" tabindex="0" role="button" aria-label="Draggable sticker: Arduino & ESP32">
+                <span>📟 ESP32 &amp; ARDUINO</span>
+              </div>
+              <div class="drag-sticker sticker-item-5" data-id="5" tabindex="0" role="button" aria-label="Draggable sticker: Design + Code">
+                <span>✦ DESIGN + CODE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toy 3: Coral Doodle Pad -->
+          <div class="play-card doodle-card reveal-item">
+            <div class="play-card-header">
+              <div class="play-card-icon">✏️</div>
+              <div>
+                <h3 class="play-card-title">Canvas Doodle Pad</h3>
+                <p class="play-card-desc">Draw with glowing strokes. Clear or download your sketch as a PNG!</p>
+              </div>
+              <div class="doodle-actions">
+                <button class="btn-sm btn-ghost" id="doodle-clear-btn" type="button">Clear</button>
+                <button class="btn-sm btn-accent" id="doodle-download-btn" type="button">Export PNG</button>
+              </div>
+            </div>
+
+            <div class="doodle-canvas-wrap" data-cursor="DRAW">
+              <canvas id="doodle-canvas" class="doodle-canvas" width="600" height="230" aria-label="Interactive drawing canvas"></canvas>
+            </div>
+
+            <div class="doodle-controls">
+              <div class="brush-size-group">
+                <span class="ctrl-label">Size:</span>
+                <button class="brush-btn active" data-size="3" aria-label="Fine brush">Fine</button>
+                <button class="brush-btn" data-size="7" aria-label="Medium brush">Medium</button>
+                <button class="brush-btn" data-size="14" aria-label="Bold brush">Bold</button>
+              </div>
+              <span class="doodle-hint">Touch &amp; Mouse supported (Capped DPR: 2)</span>
+            </div>
+          </div>
+
+          <!-- Toy 4: Spin the Skills Wheel & Orbit -->
+          <div class="play-card orbit-card reveal-item">
+            <div class="play-card-header">
+              <div class="play-card-icon">🪐</div>
+              <div>
+                <h3 class="play-card-title">Skill Orbit Wheel</h3>
+                <p class="play-card-desc">Spin the orbit wheel or click nodes to inspect proficiency.</p>
+              </div>
+              <button class="btn-sm btn-ghost" id="spin-orbit-btn" type="button">Spin</button>
+            </div>
+
+            <div class="orbit-stage" id="orbit-stage">
+              <div class="orbit-wheel" id="orbit-wheel">
+                <div class="orbit-ring-circle"></div>
+                <!-- 8 Orbital Nodes -->
+                <button class="orbit-node node-0" data-skill="UI/UX Architecture" data-level="96%" data-desc="Design token hierarchies, Figma component systems, and ergonomic layouts." aria-label="Skill UI/UX Architecture">UI/UX</button>
+                <button class="orbit-node node-1" data-skill="Embedded Systems &amp; IoT" data-level="92%" data-desc="ESP32, Arduino Uno, sensors interfacing, MQTT, and firmware development." aria-label="Skill Embedded Systems">IoT</button>
+                <button class="orbit-node node-2" data-skill="Vanilla JavaScript" data-level="95%" data-desc="Zero-dependency DOM manipulation, requestAnimationFrame, and event delegation." aria-label="Skill Vanilla JavaScript">JS</button>
+                <button class="orbit-node node-3" data-skill="Digital Electronics" data-level="90%" data-desc="Logic gates, microcontrollers, signal processing, and circuit analysis." aria-label="Skill Digital Electronics">ECE</button>
+                <button class="orbit-node node-4" data-skill="Modern CSS &amp; Grid" data-level="98%" data-desc="Responsive layouts, clamp() typography, CSS custom properties, and subgrid." aria-label="Skill Modern CSS">CSS</button>
+                <button class="orbit-node node-5" data-skill="60 FPS Performance" data-level="97%" data-desc="Sub-100ms TTI, Core Web Vitals, and hardware-accelerated animations." aria-label="Skill Performance">Perf</button>
+                <button class="orbit-node node-6" data-skill="Design Systems" data-level="94%" data-desc="Multi-brand token architectures, Figma Tokens, and component governance." aria-label="Skill Design Systems">Tokens</button>
+                <button class="orbit-node node-7" data-skill="Micro-Interactions" data-level="93%" data-desc="Physics-based cursor magnetics, 3D card tilts, and smooth layout transitions." aria-label="Skill Micro-Interactions">Motion</button>
+              </div>
+
+              <!-- Skill Orbit Detail Box in Center -->
+              <div class="orbit-center-display" id="orbit-center-display">
+                <span class="orbit-badge-pct" id="orbit-pct">96%</span>
+                <strong class="orbit-title-text" id="orbit-title">UI/UX Architecture</strong>
+                <p class="orbit-desc-text" id="orbit-desc">Design token hierarchies, Figma component systems, and ergonomic layouts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 6: SKILLS & SERVICES (Accessible Accordion) -->
+    <!-- ======================================================== -->
+    <section class="skills-section" id="skills" aria-label="Skills and Services Accordion">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal-item">
+          <div class="section-tag">// 05. CAPABILITIES</div>
+          <h2 class="section-title">SKILLS &amp; SERVICES</h2>
+          <p class="section-subtitle">Comprehensive craft across electronics engineering, interface design, and frontend code.</p>
+        </div>
+
+        <div class="accordion-container" id="skills-accordion">
+          <!-- Accordion Item 1 -->
+          <div class="accordion-item is-open reveal-item">
+            <button class="accordion-header" type="button" aria-expanded="true" aria-controls="panel-1" id="accordion-btn-1">
+              <span class="acc-num">01</span>
+              <span class="acc-title">UI/UX &amp; Product Design</span>
+              <span class="acc-badge">Figma • Tokens • Ergonomics</span>
+              <span class="acc-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion-panel" id="panel-1" role="region" aria-labelledby="accordion-btn-1">
+              <div class="panel-content">
+                <p class="panel-text">
+                  Crafting human-centric interfaces from exploratory wireframes to high-fidelity design systems. Establishing design tokens, responsive layout rules, accessible color contrast models, and intuitive user journeys that reduce cognitive friction.
+                </p>
+                <div class="skill-bars-list">
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Figma &amp; Design Systems</span><span class="bar-val">96%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.96"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>User Journey &amp; Wireframing</span><span class="bar-val">93%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.93"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Interactive Prototyping</span><span class="bar-val">95%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.95"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 2 -->
+          <div class="accordion-item reveal-item">
+            <button class="accordion-header" type="button" aria-expanded="false" aria-controls="panel-2" id="accordion-btn-2">
+              <span class="acc-num">02</span>
+              <span class="acc-title">Modern Frontend Engineering</span>
+              <span class="acc-badge">HTML5 • CSS3 Grid • Vanilla JS</span>
+              <span class="acc-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion-panel" id="panel-2" role="region" aria-labelledby="accordion-btn-2">
+              <div class="panel-content">
+                <p class="panel-text">
+                  Writing clean, semantic HTML5 and modern CSS architecture without relying on heavy unnecessary frameworks. Creating responsive, resilient web applications that load in milliseconds and deliver silky-smooth user interactions.
+                </p>
+                <div class="skill-bars-list">
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Modern CSS &amp; Fluid Layouts</span><span class="bar-val">98%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.98"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Modern Vanilla JavaScript</span><span class="bar-val">95%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.95"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Responsive Cross-Browser Architecture</span><span class="bar-val">97%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.97"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 3 -->
+          <div class="accordion-item reveal-item">
+            <button class="accordion-header" type="button" aria-expanded="false" aria-controls="panel-3" id="accordion-btn-3">
+              <span class="acc-num">03</span>
+              <span class="acc-title">Electronics, Embedded Systems &amp; IoT</span>
+              <span class="acc-badge">ESP32 • Arduino • Signals &amp; Systems</span>
+              <span class="acc-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion-panel" id="panel-3" role="region" aria-labelledby="accordion-btn-3">
+              <div class="panel-content">
+                <p class="panel-text">
+                  Interfacing physical hardware with modern digital interfaces. Programming microcontrollers (ESP32, Arduino Uno, STM32 basics), reading analog/digital sensors, and managing wireless protocols (MQTT, Bluetooth, WebSockets).
+                </p>
+                <div class="skill-bars-list">
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Microcontrollers (ESP32 / Arduino)</span><span class="bar-val">92%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.92"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Digital Electronics &amp; Logic</span><span class="bar-val">90%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.90"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>IoT &amp; Wireless Telemetry (MQTT/BT)</span><span class="bar-val">88%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.88"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 4 -->
+          <div class="accordion-item reveal-item">
+            <button class="accordion-header" type="button" aria-expanded="false" aria-controls="panel-4" id="accordion-btn-4">
+              <span class="acc-num">04</span>
+              <span class="acc-title">Performance, Accessibility &amp; Motion</span>
+              <span class="acc-badge">60 FPS • WCAG 2.1 AA • Core Web Vitals</span>
+              <span class="acc-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion-panel" id="panel-4" role="region" aria-labelledby="accordion-btn-4">
+              <div class="panel-content">
+                <p class="panel-text">
+                  Ensuring digital experiences are inclusive, battery-efficient, and blazing fast for all visitors. Full keyboard navigability, focus management, screen-reader semantics, prefers-reduced-motion accommodations, and optimized GPU rendering.
+                </p>
+                <div class="skill-bars-list">
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Core Web Vitals &amp; Page Speed</span><span class="bar-val">97%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.97"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Web Accessibility (WCAG AA)</span><span class="bar-val">95%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.95"></div></div>
+                  </div>
+                  <div class="skill-bar-row">
+                    <div class="bar-info"><span>Hardware-Accelerated Motion</span><span class="bar-val">96%</span></div>
+                    <div class="bar-track"><div class="bar-fill" style="--scale-x: 0.96"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 7: INFINITE MARQUEE STRIP -->
+    <!-- ======================================================== -->
+    <div class="marquee-section" id="marquee-strip" aria-label="Key tools and capabilities ribbon">
+      <div class="marquee-track" id="marquee-track">
+        <div class="marquee-content">
+          <span class="marquee-item">JECRC UNIVERSITY</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">ELECTRONICS &amp; COMM</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">FIGMA UI/UX</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">ESP32 &amp; ARDUINO</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">VANILLA JS</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">MODERN CSS</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">DESIGN SYSTEMS</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">60 FPS PERFORMANCE</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">ACCESSIBILITY (WCAG)</span><span class="marquee-star">✦</span>
+        </div>
+        <!-- Duplicated track for seamless infinite looping -->
+        <div class="marquee-content" aria-hidden="true">
+          <span class="marquee-item">JECRC UNIVERSITY</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">ELECTRONICS &amp; COMM</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">FIGMA UI/UX</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">ESP32 &amp; ARDUINO</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">VANILLA JS</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">MODERN CSS</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">DESIGN SYSTEMS</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">60 FPS PERFORMANCE</span><span class="marquee-star">✦</span>
+          <span class="marquee-item">ACCESSIBILITY (WCAG)</span><span class="marquee-star">✦</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 8: TESTIMONIALS SLIDER -->
+    <!-- ======================================================== -->
+    <section class="testimonials-section" id="testimonials" aria-label="Peer and Mentor Endorsements">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header-row reveal-item">
+          <div>
+            <div class="section-tag">// 06. PRAISE &amp; FEEDBACK</div>
+            <h2 class="section-title">WHAT PARTNERS SAY</h2>
+            <p class="section-subtitle">Real feedback from engineering mentors, product founders, and design collaborators.</p>
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="slider-nav-btns" aria-label="Testimonial slider controls">
+            <button class="slider-btn prev-btn magnetic" id="slider-prev-btn" type="button" aria-label="Previous testimonial">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16L7 10L13 4"></path></svg>
+            </button>
+            <button class="slider-btn next-btn magnetic" id="slider-next-btn" type="button" aria-label="Next testimonial">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4L13 10L7 16"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Slider Stage -->
+        <div class="testimonials-slider-stage" id="testimonials-stage" data-cursor="SWIPE">
+          <div class="testimonials-track" id="testimonials-track">
+            <!-- Slide 1 -->
+            <div class="testimonial-slide active" data-slide="0">
+              <div class="testimonial-card">
+                <div class="quote-mark">“</div>
+                <p class="quote-text">
+                  Adarsh is that rare creative technologist who marries immaculate visual taste with rigorous engineering discipline. He overhauled our design system and delivered a web experience that feels completely alive.
+                </p>
+                <div class="quotee-info">
+                  <div class="quotee-avatar">SL</div>
+                  <div>
+                    <h4 class="quotee-name">Sarah Lin</h4>
+                    <p class="quotee-role">Head of Product Design, Vertex Studio</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="testimonial-slide" data-slide="1">
+              <div class="testimonial-card">
+                <div class="quote-mark">“</div>
+                <p class="quote-text">
+                  Adarsh's understanding of both hardware sensors and frontend web sockets made our IoT dashboard project effortless. Zero framework bloat, instant data sync, and pristine typography.
+                </p>
+                <div class="quotee-info">
+                  <div class="quotee-avatar">RJ</div>
+                  <div>
+                    <h4 class="quotee-name">Prof. R. Joshi</h4>
+                    <p class="quotee-role">ECE Department Mentor, JECRC University</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="testimonial-slide" data-slide="2">
+              <div class="testimonial-card">
+                <div class="quote-mark">“</div>
+                <p class="quote-text">
+                  Working with Adarsh was effortlessly seamless. He solved complex layout hurdles with pure CSS, wrote zero framework bloat, and kept every animation at a locked 60 frames per second.
+                </p>
+                <div class="quotee-info">
+                  <div class="quotee-avatar">MV</div>
+                  <div>
+                    <h4 class="quotee-name">Marcus Vance</h4>
+                    <p class="quotee-role">Co-Founder &amp; CTO, Chronos Labs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="testimonial-slide" data-slide="3">
+              <div class="testimonial-card">
+                <div class="quote-mark">“</div>
+                <p class="quote-text">
+                  High communication, pixel perfection, and deep technical mastery. Adarsh delivered ahead of schedule and our user engagement metrics jumped 40% post-launch.
+                </p>
+                <div class="quotee-info">
+                  <div class="quotee-avatar">DC</div>
+                  <div>
+                    <h4 class="quotee-name">David Chen</h4>
+                    <p class="quotee-role">VP of Engineering, Lumina Space</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slider Dots -->
+          <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Testimonial slides pagination">
+            <button class="slider-dot active" role="tab" aria-selected="true" data-slide="0" aria-label="Go to slide 1"></button>
+            <button class="slider-dot" role="tab" aria-selected="false" data-slide="1" aria-label="Go to slide 2"></button>
+            <button class="slider-dot" role="tab" aria-selected="false" data-slide="2" aria-label="Go to slide 3"></button>
+            <button class="slider-dot" role="tab" aria-selected="false" data-slide="3" aria-label="Go to slide 4"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 9: CONTACT SECTION -->
+    <!-- ======================================================== -->
+    <section class="contact-section spotlight-area" id="contact" aria-label="Contact Adarsh Kumar Singh">
+      <div class="container">
+        <!-- Floating Say Hi Sticker -->
+        <div class="floating-sayhi-sticker float-slow" aria-hidden="true">
+          <span>Say Hi! 👋</span>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left: Big Display Message & Direct Info -->
+          <div class="contact-info-col reveal-item">
+            <div class="section-tag">// 07. GET IN TOUCH</div>
+            <h2 class="contact-display-title">
+              LET'S BUILD SOMETHING EXTRAORDINARY.
+            </h2>
+            <p class="contact-subtext">
+              Have an upcoming product redesign, embedded IoT build, design system need, or a creative frontend build? I'm currently open for freelance projects, internships, and collaborative opportunities.
+            </p>
+
+            <!-- Quick Email Copy Box -->
+            <div class="email-copy-box">
+              <div class="copy-box-left">
+                <span class="copy-box-label">Direct Email</span>
+                <span class="copy-box-email" id="target-email">adarsh.dev@example.com</span>
+              </div>
+              <button class="btn btn-sm btn-accent magnetic" id="copy-email-btn" type="button" aria-label="Copy email address to clipboard">
+                <span id="copy-btn-text">Copy Email</span>
+                <svg class="copy-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="8" y="8" width="10" height="10" rx="2"></rect>
+                  <path d="M4 12V4a2 2 0 0 1 2-2h8"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Live Status & Local Time Card -->
+            <div class="live-status-card">
+              <div class="status-indicator-row">
+                <span class="pulse-dot"></span>
+                <strong>B.Tech ECE Student @ JECRC University, Jaipur</strong>
+              </div>
+              <div class="local-time-row">
+                <span class="clock-icon">🕒</span>
+                <span>Adarsh's Local Time: </span>
+                <span class="time-display" id="local-clock">--:--:-- IST</span>
+              </div>
+            </div>
+
+            <!-- Social Links Row -->
+            <div class="social-links-wrap">
+              <span class="social-label">Connect across the web:</span>
+              <div class="social-pills-row">
+                <!-- EDIT ME: Replace placeholder URLs with your personal profiles -->
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-pill magnetic">GitHub</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-pill magnetic">LinkedIn</a>
+                <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="social-pill magnetic">Dribbble</a>
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-pill magnetic">X / Twitter</a>
+                <a href="https://codepen.io" target="_blank" rel="noopener noreferrer" class="social-pill magnetic">CodePen</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Contact Form -->
+          <div class="contact-form-col reveal-item">
+            <form class="contact-form" id="contact-form" novalidate aria-label="Send a direct message">
+              <h3 class="form-heading">Send a Message</h3>
+
+              <!-- Name Field -->
+              <div class="form-group" id="group-name">
+                <label for="contact-name" class="form-label">Your Name <span class="req">*</span></label>
+                <input 
+                  type="text" 
+                  id="contact-name" 
+                  name="name" 
+                  class="form-input" 
+                  placeholder="e.g. Alex Morgan" 
+                  required 
+                  minlength="2"
+                  autocomplete="name">
+                <span class="form-error-msg" id="err-name" aria-live="polite"></span>
+              </div>
+
+              <!-- Email Field -->
+              <div class="form-group" id="group-email">
+                <label for="contact-email" class="form-label">Your Email <span class="req">*</span></label>
+                <input 
+                  type="email" 
+                  id="contact-email" 
+                  name="email" 
+                  class="form-input" 
+                  placeholder="alex@company.com" 
+                  required
+                  autocomplete="email">
+                <span class="form-error-msg" id="err-email" aria-live="polite"></span>
+              </div>
+
+              <!-- Project Type Selection -->
+              <div class="form-group">
+                <label class="form-label">Project Type</label>
+                <div class="project-type-pills" role="radiogroup" aria-label="Select project type">
+                  <label class="type-pill">
+                    <input type="radio" name="projectType" value="Full Website" checked>
+                    <span>Full Website</span>
+                  </label>
+                  <label class="type-pill">
+                    <input type="radio" name="projectType" value="Electronics / IoT">
+                    <span>Electronics / IoT</span>
+                  </label>
+                  <label class="type-pill">
+                    <input type="radio" name="projectType" value="Design System">
+                    <span>Design System</span>
+                  </label>
+                  <label class="type-pill">
+                    <input type="radio" name="projectType" value="Other">
+                    <span>Other</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Message Field -->
+              <div class="form-group" id="group-message">
+                <div class="label-with-count">
+                  <label for="contact-message" class="form-label">Your Message <span class="req">*</span></label>
+                  <span class="char-counter" id="char-counter">0 / 500</span>
+                </div>
+                <textarea 
+                  id="contact-message" 
+                  name="message" 
+                  class="form-textarea" 
+                  rows="5" 
+                  placeholder="Tell me about your project, timeline, and goals..." 
+                  required 
+                  minlength="10" 
+                  maxlength="500"></textarea>
+                <span class="form-error-msg" id="err-message" aria-live="polite"></span>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary btn-submit-form magnetic" id="submit-btn" data-cursor="SEND">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+                <svg class="btn-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M5 15L15 5M15 5H7M15 5V13"></path>
+                </svg>
+              </button>
+
+              <!-- Success Alert Message -->
+              <div class="form-success-banner" id="form-success-banner" role="alert" aria-live="polite">
+                <span class="success-icon">✓</span>
+                <div>
+                  <strong>Message sent successfully!</strong>
+                  <p>Thanks for reaching out, Adarsh will respond within 24 hours.</p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- FOOTER -->
+  <!-- ======================================================== -->
+  <footer class="site-footer" id="site-footer">
+    <div class="container footer-container">
+      <div class="footer-top-row">
+        <div>
+          <a href="#hero" class="footer-logo magnetic">ADARSH<span class="accent-dot">.</span></a>
+          <p class="footer-tagline">
+            &copy; <span id="current-year">2026</span> Adarsh Kumar Singh | B.Tech ECE, JECRC University, Jaipur. Crafted with clean HTML, CSS &amp; vanilla JS. Zero frameworks.
+          </p>
+        </div>
+
+        <button class="back-to-top-btn magnetic" id="back-to-top-btn" type="button" aria-label="Back to top of page" data-cursor="TOP">
+          <span>Back to Top</span>
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 16V4M10 4L4 10M10 4L16 10"></path></svg>
+        </button>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright-text">
+          Electronics &amp; Communication Engineering • JECRC University, Jaipur • All rights reserved.
+        </div>
+        <div class="easter-egg-hint">
+          <span class="konami-tip">⌨️ Pro Tip: Try the Konami Code (↑ ↑ ↓ ↓ ← → ← → B A)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ======================================================== -->
+  <!-- PROJECT CASE STUDY DETAILED MODAL -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-title" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-window" id="modal-window">
+      <!-- Modal Close Button -->
+      <button class="modal-close-btn magnetic" id="modal-close-btn" type="button" aria-label="Close project modal (Esc)">
+        ✕
+      </button>
+
+      <div class="modal-scroll-body">
+        <!-- Modal Banner / Cover -->
+        <div class="modal-hero-cover" id="modal-hero-cover">
+          <span class="modal-category-badge" id="modal-category">Category</span>
+          <h2 class="modal-title" id="modal-project-title">Project Title</h2>
+          <p class="modal-tagline" id="modal-tagline">One line summary of the project.</p>
+        </div>
+
+        <!-- Meta Bar -->
+        <div class="modal-meta-bar">
+          <div class="meta-item">
+            <span class="meta-label">Year</span>
+            <span class="meta-value" id="modal-year">2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Role</span>
+            <span class="meta-value" id="modal-role">Hardware &amp; Software Dev</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Client</span>
+            <span class="meta-value" id="modal-client">JECRC ECE Lab / Open Source</span>
+          </div>
+          <div class="meta-item-links">
+            <a href="#projects" class="btn btn-sm btn-accent" id="modal-demo-link" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+            <a href="#projects" class="btn btn-sm btn-ghost" id="modal-code-link" target="_blank" rel="noopener noreferrer">Source Code</a>
+          </div>
+        </div>
+
+        <!-- Modal Content Grid -->
+        <div class="modal-details-grid">
+          <!-- Left: Narrative -->
+          <div class="modal-narrative">
+            <section class="modal-section">
+              <h3 class="modal-subheading">The Challenge</h3>
+              <p class="modal-p" id="modal-challenge">Description of the problem space and initial constraints.</p>
+            </section>
+
+            <section class="modal-section">
+              <h3 class="modal-subheading">The Architecture &amp; Solution</h3>
+              <p class="modal-p" id="modal-solution">How the design and technical approach resolved the challenge.</p>
+            </section>
+
+            <section class="modal-section">
+              <h3 class="modal-subheading">Key Results &amp; Impact</h3>
+              <ul class="modal-results-list" id="modal-results">
+                <li>Result item 1</li>
+                <li>Result item 2</li>
+              </ul>
+            </section>
+          </div>
+
+          <!-- Right: Tech Stack & Key Highlights -->
+          <div class="modal-sidebar">
+            <div class="sidebar-box">
+              <h4 class="sidebar-heading">Technologies Used</h4>
+              <div class="modal-tech-tags" id="modal-tech-tags">
+                <span class="tag">ESP32</span>
+                <span class="tag">Vanilla JS</span>
+              </div>
+            </div>
+
+            <div class="sidebar-box">
+              <h4 class="sidebar-heading">Key Highlights</h4>
+              <ul class="sidebar-list" id="modal-highlights">
+                <li>Hardware &amp; Software Co-design</li>
+                <li>Sub-100ms Telemetry Response</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Navigation Footer -->
+        <div class="modal-footer-nav">
+          <button class="btn btn-ghost" id="modal-prev-btn" type="button">← Previous Project</button>
+          <button class="btn btn-ghost" id="modal-next-btn" type="button">Next Project →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- PHOTO LIGHTBOX MODAL -->
+  <!-- ======================================================== -->
+  <div class="lightbox-overlay" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-container">
+      <button class="lightbox-close-btn magnetic" id="lightbox-close-btn" type="button" aria-label="Close Lightbox (Esc)">✕</button>
+      <button class="lightbox-nav-btn prev-btn magnetic" id="lightbox-prev-btn" type="button" aria-label="Previous photo">‹</button>
+      <button class="lightbox-nav-btn next-btn magnetic" id="lightbox-next-btn" type="button" aria-label="Next photo">›</button>
+
+      <div class="lightbox-content">
+        <div class="lightbox-img-wrap" id="lightbox-img-wrap">
+          <img id="lightbox-img" src="assets/adarsh-1.jpg" alt="Enlarged photo" width="800" height="600" loading="lazy" decoding="async" onerror="handleImgError(this)" data-caption="Adarsh Kumar Singh">
+        </div>
+        <div class="lightbox-caption" id="lightbox-caption">Photo caption text</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inline Initial Image Fallback Utility -->
+  <script>
+    // Robust inline fallback handler so images never break the layout even if files are missing or moved
+    function handleImgError(img) {
+      if (!img) return;
+      img.onerror = null; // Prevent loop
+      const parent = img.parentElement;
+      if (!parent) return;
+      const caption = img.getAttribute('data-caption') || img.alt || 'Adarsh Kumar Singh';
+      const fallbackDiv = document.createElement('div');
+      fallbackDiv.className = 'img-aks-fallback';
+      fallbackDiv.setAttribute('role', 'img');
+      fallbackDiv.setAttribute('aria-label', caption);
+      fallbackDiv.innerHTML = `
+        <div class="aks-fallback-content">
+          <div class="aks-monogram">AKS</div>
+          <div class="aks-name">${caption}</div>
+          <div class="aks-subtitle">Digital Designer • ECE Student</div>
+        </div>
+      `;
+      img.style.display = 'none';
+      parent.appendChild(fallbackDiv);
+    }
+  </script>
+</body>
+</html>
